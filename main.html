@@ -1,0 +1,73 @@
+<!DOCTYPE html>  
+<html>  
+  
+<head> 
+    <title> 
+        CLI
+    </title>
+
+    <style>
+        body {
+          background-color: #eee;
+        }
+        input {
+          border-top-style: hidden;
+          border-right-style: hidden;
+          border-left-style: hidden;
+          border-bottom-style: groove;
+          background-color: #eee;
+        }
+        
+        .no-outline:focus {
+          outline: none;
+        }
+      </style>
+      
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+</head> 
+         
+<body style = "text-align:left;">  
+     
+    <h1 style = "color:green;" >  
+        root@#  <input id="pass" style="font-size:25px;" type="text" class="no-outline" size="60" ><br>
+        <pre> <div id="d1"> </div>  <pre></pre>
+    </h1>  
+
+   
+   
+    <script> 
+        $("#pass").keypress(function(event) {
+            if (event.keyCode === 13) {
+                sandcmd();
+            }
+        });
+
+        function sandcmd()
+        {   
+            
+            alert("start");
+            var i = document.getElementById("pass").value
+            
+            var xhr = new XMLHttpRequest();
+            // here fasle means sync and true means async with AJAX
+            xhr.open("GET", "http://192.168.29.78/cgi-bin/home.py?x=" + i, true);
+            // here write IP(192.168.43.125) after config your IP adress using - (ifconfig enp0s3)
+            xhr.send();
+
+            // here  onload will take the return text from server [cgi-bin folder]
+            xhr.onload = function() {
+                    var output = xhr.responseText;
+                    document.getElementById("d1").innerHTML = output;
+            }
+
+            alert("done");
+
+        }
+
+
+   
+    </script> 
+</body>  
+  
+</html> 
